@@ -6,10 +6,12 @@
 <title>Pavel Saiganov — Cross-Cultural Strategy &amp; Systems Analyst</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,450;14..32,650;14..32,750;14..32,780;14..32,800;14..32,850&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400..900;1,400..900&family=Vollkorn+SC:wght@400;600&display=swap" rel="stylesheet">
 <style>
 /* ── BITGROQS DESIGN TOKENS ── */
 :root {
+  color-scheme: light dark;
+
   /* Brand */
   --color-brand-primary: #0A1428;
   --color-brand-secondary: #4B1D8C;
@@ -45,20 +47,23 @@
   --color-success-hover: var(--color-dopamine-lime-dark);
   --color-info: var(--color-brand-accent-blue);
 
+  /* Dark theme (default) */
   --color-bg-primary: var(--color-neutral-950);
   --color-bg-secondary: var(--color-neutral-900);
   --color-bg-elevated: #1A2332;
+  --color-panel-border: var(--color-neutral-800);
   --color-text-primary: var(--color-neutral-50);
   --color-text-secondary: var(--color-neutral-400);
   --color-text-tertiary: var(--color-neutral-500);
   --color-text-inverse: var(--color-neutral-950);
+  --color-track-bg: var(--color-neutral-800);
 
   /* Gradients */
   --gradient-hero: linear-gradient(160deg, #0A1428 0%, #1E1B4B 50%, #4B1D8C 100%);
   --gradient-dopamine: linear-gradient(135deg, #E76A3C 0%, #C71A24 100%);
 
-  /* Typography */
-  --font-sans: 'Inter', 'Satoshi', system-ui, -apple-system, sans-serif;
+  /* Typography — Palladio/Pagella-style humanist serif */
+  --font-sans: 'Vollkorn', 'P052', 'URW Palladio L', 'TeX Gyre Pagella', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, 'Times New Roman', serif;
 
   /* Spacing */
   --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
@@ -83,6 +88,28 @@
   --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Light theme — applied automatically when the device/browser prefers light mode */
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-bg-primary: var(--color-neutral-50);
+    --color-bg-secondary: var(--color-neutral-100);
+    --color-bg-elevated: var(--color-neutral-0);
+    --color-panel-border: var(--color-neutral-200);
+    --color-text-primary: var(--color-neutral-900);
+    --color-text-secondary: var(--color-neutral-600);
+    --color-text-tertiary: var(--color-neutral-500);
+    --color-text-inverse: var(--color-neutral-0);
+    --color-track-bg: var(--color-neutral-200);
+
+    --shadow-md: 0 4px 6px -1px rgb(15 23 42 / 0.06), 0 2px 4px -2px rgb(15 23 42 / 0.05);
+    --shadow-lg: 0 10px 15px -3px rgb(15 23 42 / 0.08), 0 4px 6px -4px rgb(15 23 42 / 0.06);
+    --shadow-xl: 0 20px 25px -5px rgb(15 23 42 / 0.12), 0 8px 10px -6px rgb(15 23 42 / 0.08);
+  }
+
+  .pill.violet { color: #6E4FE0; }
+  .pill.risk { color: var(--color-dopamine-red); }
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
@@ -93,6 +120,7 @@ body {
   -webkit-font-smoothing: antialiased;
   line-height: 1.65;
   padding: var(--space-12) var(--space-6) var(--space-16);
+  transition: background-color var(--duration-normal) var(--ease-default), color var(--duration-normal) var(--ease-default);
 }
 
 a { color: var(--color-info); text-decoration: none; transition: color var(--duration-normal) var(--ease-default); }
@@ -172,9 +200,9 @@ a:hover { color: var(--color-dopamine-orange); }
 .panel {
   background-color: var(--color-bg-elevated);
   border-radius: var(--radius-2xl);
-  border: 1px solid var(--color-neutral-800);
+  border: 1px solid var(--color-panel-border);
   padding: var(--space-8);
-  transition: transform var(--duration-normal) var(--ease-default), box-shadow var(--duration-normal) var(--ease-default);
+  transition: transform var(--duration-normal) var(--ease-default), box-shadow var(--duration-normal) var(--ease-default), background-color var(--duration-normal) var(--ease-default), border-color var(--duration-normal) var(--ease-default);
 }
 .panel:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
 .panel-header { margin-bottom: var(--space-6); color: var(--color-text-primary); }
@@ -190,7 +218,7 @@ a:hover { color: var(--color-dopamine-orange); }
 .coach-card strong { color: var(--color-dopamine-orange); font-weight: 750; }
 
 /* Jobs */
-.job-item { margin-bottom: var(--space-8); padding-bottom: var(--space-8); border-bottom: 1px solid var(--color-neutral-800); }
+.job-item { margin-bottom: var(--space-8); padding-bottom: var(--space-8); border-bottom: 1px solid var(--color-panel-border); }
 .job-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
 
 .job-header {
@@ -220,24 +248,58 @@ a:hover { color: var(--color-dopamine-orange); }
 
 .pill-group { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); }
 .pill {
-  background-color: var(--color-bg-secondary);
-  color: var(--color-text-secondary);
-  border: 1px solid var(--color-neutral-700);
   border-radius: var(--radius-full);
   padding: var(--space-1) var(--space-3);
   font-size: 0.6875rem;
   font-weight: 650;
+  border: 1px solid transparent;
+  transition: transform var(--duration-normal) var(--ease-default);
 }
+
+/* Default (neutral) pill — still gets a soft tinted background, never plain grey */
+.pill {
+  background-color: rgba(148, 163, 184, 0.14);
+  color: var(--color-text-secondary);
+  border-color: rgba(148, 163, 184, 0.28);
+}
+
+/* Orange — tech / AI / execution */
 .pill.accent {
-  background-color: rgba(231, 106, 60, 0.12);
+  background-color: rgba(231, 106, 60, 0.14);
   color: var(--color-dopamine-orange);
-  border-color: rgba(231, 106, 60, 0.3);
+  border-color: rgba(231, 106, 60, 0.32);
 }
+
+/* Blue — GR / diplomacy / strategy */
 .pill.info {
-  background-color: rgba(25, 174, 249, 0.12);
+  background-color: rgba(25, 174, 249, 0.14);
   color: var(--color-info);
-  border-color: rgba(25, 174, 249, 0.3);
+  border-color: rgba(25, 174, 249, 0.32);
 }
+
+/* Purple — negotiation / protocol / cross-cultural */
+.pill.violet {
+  background-color: rgba(139, 108, 247, 0.16);
+  color: #B4A3FF;
+  border-color: rgba(139, 108, 247, 0.34);
+}
+
+/* Lime — outcomes / metrics / success */
+.pill.success {
+  background-color: rgba(97, 153, 0, 0.16);
+  color: var(--color-dopamine-lime);
+  border-color: rgba(97, 153, 0, 0.34);
+}
+
+/* Red — risk / crisis management */
+.pill.risk {
+  background-color: rgba(199, 26, 36, 0.14);
+  color: #FF6B70;
+  border-color: rgba(199, 26, 36, 0.32);
+}
+
+.pill-group:hover .pill { opacity: 0.85; }
+.pill-group .pill:hover { opacity: 1; transform: translateY(-1px); }
 
 /* Education */
 .edu-item { margin-bottom: var(--space-5); }
@@ -251,7 +313,7 @@ a:hover { color: var(--color-dopamine-orange); }
 .lang-top { display: flex; justify-content: space-between; margin-bottom: var(--space-2); }
 .lang-name { color: var(--color-text-primary); font-weight: 650; font-size: 0.8125rem; }
 .lang-level { color: var(--color-dopamine-orange); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.05em; }
-.lang-track { width: 100%; height: 6px; border-radius: var(--radius-full); background-color: var(--color-neutral-800); overflow: hidden; }
+.lang-track { width: 100%; height: 6px; border-radius: var(--radius-full); background-color: var(--color-track-bg); overflow: hidden; }
 .lang-fill { height: 100%; border-radius: var(--radius-full); background: var(--gradient-dopamine); }
 
 /* Responsive */
@@ -344,10 +406,10 @@ a:hover { color: var(--color-dopamine-orange); }
             <li><strong>Requirements &amp; process bridge:</strong> Translated market and stakeholder needs into functional/non-functional requirements, AS-IS / TO-BE process maps, and use cases connecting go-to-market goals with technical delivery.</li>
           </ul>
           <div class="pill-group">
-            <span class="pill accent">Market Entry (Brazil)</span>
+            <span class="pill info">Market Entry (Brazil)</span>
             <span class="pill accent">AI-Assisted Workflows</span>
-            <span class="pill">BRD / SRS</span>
-            <span class="pill">Use Cases</span>
+            <span class="pill violet">BRD / SRS</span>
+            <span class="pill violet">Use Cases</span>
           </div>
         </div>
 
@@ -372,9 +434,9 @@ a:hover { color: var(--color-dopamine-orange); }
           </ul>
           <div class="pill-group">
             <span class="pill info">Government Relations</span>
-            <span class="pill">Risk Management</span>
-            <span class="pill">AS-IS / TO-BE</span>
-            <span class="pill">C-Level Reporting</span>
+            <span class="pill risk">Risk Management</span>
+            <span class="pill violet">AS-IS / TO-BE</span>
+            <span class="pill success">C-Level Reporting</span>
           </div>
         </div>
 
@@ -399,7 +461,7 @@ a:hover { color: var(--color-dopamine-orange); }
             <span class="pill accent">Python</span>
             <span class="pill accent">REST API</span>
             <span class="pill accent">LLM Integration</span>
-            <span class="pill">System Design</span>
+            <span class="pill violet">System Design</span>
           </div>
         </div>
 
@@ -423,8 +485,8 @@ a:hover { color: var(--color-dopamine-orange); }
           </ul>
           <div class="pill-group">
             <span class="pill info">Diplomatic Protocol</span>
-            <span class="pill">Simultaneous Interpretation</span>
-            <span class="pill">GR Consulting</span>
+            <span class="pill violet">Simultaneous Interpretation</span>
+            <span class="pill info">GR Consulting</span>
           </div>
         </div>
 
@@ -446,9 +508,9 @@ a:hover { color: var(--color-dopamine-orange); }
             <li><strong>Real-time interpretation &amp; incident resolution:</strong> Interpreted closed-door meetings and official press conferences; sole point of contact between the Organising Committee, local authorities, and delegation leadership.</li>
           </ul>
           <div class="pill-group">
-            <span class="pill accent">Crisis Management</span>
-            <span class="pill">Operational Coordination</span>
-            <span class="pill">Protocol</span>
+            <span class="pill risk">Crisis Management</span>
+            <span class="pill violet">Operational Coordination</span>
+            <span class="pill info">Protocol</span>
           </div>
         </div>
 
@@ -467,8 +529,8 @@ a:hover { color: var(--color-dopamine-orange); }
           <div class="pill-group" style="margin-top: 0;">
             <span class="pill info">Market Entry Strategy</span>
             <span class="pill info">Government Relations</span>
-            <span class="pill">C-Level Negotiation</span>
-            <span class="pill">Diplomatic Protocol</span>
+            <span class="pill violet">C-Level Negotiation</span>
+            <span class="pill violet">Diplomatic Protocol</span>
           </div>
         </div>
 
@@ -477,9 +539,9 @@ a:hover { color: var(--color-dopamine-orange); }
           <div class="pill-group" style="margin-top: 0;">
             <span class="pill accent">BRD / SRS / FRS</span>
             <span class="pill accent">REST API Design</span>
-            <span class="pill">BPMN 2.0</span>
-            <span class="pill">Use Cases / User Stories</span>
-            <span class="pill">Requirements Gathering</span>
+            <span class="pill violet">BPMN 2.0</span>
+            <span class="pill violet">Use Cases / User Stories</span>
+            <span class="pill violet">Requirements Gathering</span>
           </div>
         </div>
 
@@ -487,10 +549,10 @@ a:hover { color: var(--color-dopamine-orange); }
           <div class="text-label" style="color: var(--color-text-tertiary); margin-bottom: var(--space-2);">Technology &amp; AI</div>
           <div class="pill-group" style="margin-top: 0;">
             <span class="pill accent">AI-Assisted Prototyping</span>
-            <span class="pill">ChatGPT / Copilot</span>
-            <span class="pill">Python</span>
-            <span class="pill">JSON / XML / SQL</span>
-            <span class="pill">Postman / Swagger</span>
+            <span class="pill accent">ChatGPT / Copilot</span>
+            <span class="pill accent">Python</span>
+            <span class="pill accent">JSON / XML / SQL</span>
+            <span class="pill accent">Postman / Swagger</span>
           </div>
         </div>
       </section>
