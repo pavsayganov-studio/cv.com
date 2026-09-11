@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pavel Saiganov — Cross-Cultural Strategy &amp; Systems Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,450;14..32,650;14..32,750;14..32,780;14..32,800;14..32,850&display=swap" rel="stylesheet">
+<style>
+/* ── BITGROQS DESIGN TOKENS ── */
+:root {
+  /* Brand */
+  --color-brand-primary: #0A1428;
+  --color-brand-secondary: #4B1D8C;
+  --color-brand-accent-blue: #19AEF9;
+
+  /* Dopamine Palette */
+  --color-dopamine-orange: #E76A3C;
+  --color-dopamine-orange-dark: #D34E15;
+  --color-dopamine-red: #C71A24;
+  --color-dopamine-red-dark: #B60311;
+  --color-dopamine-lime: #619900;
+  --color-dopamine-lime-dark: #528000;
+
+  /* Neutrals */
+  --color-neutral-0: #FFFFFF;
+  --color-neutral-50: #F8FAFC;
+  --color-neutral-100: #F1F5F9;
+  --color-neutral-200: #E2E8F0;
+  --color-neutral-300: #CBD5E1;
+  --color-neutral-400: #94A3B8;
+  --color-neutral-500: #64748B;
+  --color-neutral-600: #475569;
+  --color-neutral-700: #334155;
+  --color-neutral-800: #1E293B;
+  --color-neutral-900: #0F172A;
+  --color-neutral-950: #020617;
+
+  /* Semantic */
+  --color-primary: var(--color-dopamine-orange);
+  --color-primary-hover: var(--color-dopamine-orange-dark);
+  --color-primary-foreground: #FFFFFF;
+  --color-success: var(--color-dopamine-lime);
+  --color-success-hover: var(--color-dopamine-lime-dark);
+  --color-info: var(--color-brand-accent-blue);
+
+  --color-bg-primary: var(--color-neutral-950);
+  --color-bg-secondary: var(--color-neutral-900);
+  --color-bg-elevated: #1A2332;
+  --color-text-primary: var(--color-neutral-50);
+  --color-text-secondary: var(--color-neutral-400);
+  --color-text-tertiary: var(--color-neutral-500);
+  --color-text-inverse: var(--color-neutral-950);
+
+  /* Gradients */
+  --gradient-hero: linear-gradient(160deg, #0A1428 0%, #1E1B4B 50%, #4B1D8C 100%);
+  --gradient-dopamine: linear-gradient(135deg, #E76A3C 0%, #C71A24 100%);
+
+  /* Typography */
+  --font-sans: 'Inter', 'Satoshi', system-ui, -apple-system, sans-serif;
+
+  /* Spacing */
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+  --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem;
+  --space-12: 3rem; --space-16: 4rem; --space-20: 5rem; --space-24: 6rem;
+
+  /* Radius */
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.15), 0 4px 6px -4px rgb(0 0 0 / 0.15);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.2), 0 8px 10px -6px rgb(0 0 0 / 0.2);
+  --shadow-dopamine: 0 0 20px -5px rgba(231, 106, 60, 0.4);
+
+  /* Motion */
+  --duration-normal: 250ms;
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.65;
+  padding: var(--space-12) var(--space-6) var(--space-16);
+}
+
+a { color: var(--color-info); text-decoration: none; transition: color var(--duration-normal) var(--ease-default); }
+a:hover { color: var(--color-dopamine-orange); }
+
+/* Typography scale */
+.text-label { font-size: 0.625rem; font-weight: 800; line-height: 1.4; letter-spacing: 0.10em; text-transform: uppercase; }
+.text-caption { font-size: 0.6875rem; font-weight: 650; line-height: 1.5; }
+.text-body-small { font-size: 0.75rem; font-weight: 450; line-height: 1.6; }
+.text-body { font-size: 0.875rem; font-weight: 450; line-height: 1.7; }
+.text-lead { font-size: 1rem; font-weight: 450; line-height: 1.7; }
+.text-h4 { font-size: 1.125rem; font-weight: 750; line-height: 1.3; letter-spacing: -0.02em; }
+.text-h3 { font-size: 1.375rem; font-weight: 780; line-height: 1.2; letter-spacing: -0.03em; }
+.text-h2 { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 820; line-height: 1.05; letter-spacing: -0.045em; }
+.text-display { font-size: clamp(2rem, 5vw, 3.875rem); font-weight: 850; line-height: 1; letter-spacing: -0.05em; }
+
+/* Layout */
+.workspace { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--space-6); }
+.bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--space-6); }
+.col-8 { grid-column: span 8; display: flex; flex-direction: column; gap: var(--space-6); }
+.col-4 { grid-column: span 4; display: flex; flex-direction: column; gap: var(--space-6); }
+
+/* Hero */
+.hero-anchor {
+  background: var(--gradient-hero);
+  color: var(--color-neutral-50);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-12);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.hero-anchor .hero-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+}
+
+.hero-anchor .contact-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  color: var(--color-neutral-300);
+}
+
+.hero-anchor a { color: var(--color-neutral-50); text-decoration: underline; text-decoration-color: rgba(255,255,255,0.3); }
+.hero-anchor a:hover { color: var(--color-dopamine-orange); text-decoration-color: var(--color-dopamine-orange); }
+
+.highlight-dopamine { color: var(--color-dopamine-orange); }
+.highlight-info { color: var(--color-info); }
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: fit-content;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  background: rgba(231, 106, 60, 0.12);
+  border: 1px solid rgba(231, 106, 60, 0.35);
+}
+.status-chip::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--color-dopamine-orange);
+  box-shadow: 0 0 8px var(--color-dopamine-orange);
+}
+
+/* Panels */
+.panel {
+  background-color: var(--color-bg-elevated);
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--color-neutral-800);
+  padding: var(--space-8);
+  transition: transform var(--duration-normal) var(--ease-default), box-shadow var(--duration-normal) var(--ease-default);
+}
+.panel:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.panel-header { margin-bottom: var(--space-6); color: var(--color-text-primary); }
+
+.coach-card {
+  background: linear-gradient(135deg, rgba(75,29,140,0.35) 0%, rgba(231,106,60,0.10) 100%);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  margin-bottom: var(--space-6);
+  border: 1px solid rgba(231, 106, 60, 0.2);
+}
+.coach-card p { color: var(--color-text-primary); }
+.coach-card strong { color: var(--color-dopamine-orange); font-weight: 750; }
+
+/* Jobs */
+.job-item { margin-bottom: var(--space-8); padding-bottom: var(--space-8); border-bottom: 1px solid var(--color-neutral-800); }
+.job-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-3);
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.job-role { color: var(--color-text-primary); }
+.job-company { color: var(--color-info); margin-top: var(--space-1); font-weight: 600; }
+.job-date { color: var(--color-text-tertiary); text-align: right; white-space: nowrap; }
+.job-desc { color: var(--color-text-secondary); margin-bottom: var(--space-4); font-style: italic; }
+
+.job-bullets { list-style: none; padding-left: var(--space-3); display: flex; flex-direction: column; gap: var(--space-2); }
+.job-bullets li { position: relative; padding-left: var(--space-4); color: var(--color-text-secondary); }
+.job-bullets li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--color-dopamine-orange);
+  font-weight: 800;
+}
+.job-bullets li strong { color: var(--color-text-primary); font-weight: 650; }
+
+.pill-group { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); }
+.pill {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-neutral-700);
+  border-radius: var(--radius-full);
+  padding: var(--space-1) var(--space-3);
+  font-size: 0.6875rem;
+  font-weight: 650;
+}
+.pill.accent {
+  background-color: rgba(231, 106, 60, 0.12);
+  color: var(--color-dopamine-orange);
+  border-color: rgba(231, 106, 60, 0.3);
+}
+.pill.info {
+  background-color: rgba(25, 174, 249, 0.12);
+  color: var(--color-info);
+  border-color: rgba(25, 174, 249, 0.3);
+}
+
+/* Education */
+.edu-item { margin-bottom: var(--space-5); }
+.edu-item:last-child { margin-bottom: 0; }
+.edu-title { color: var(--color-text-primary); margin-bottom: var(--space-1); }
+.edu-sub { color: var(--color-text-secondary); margin-bottom: var(--space-1); }
+
+/* Language bars */
+.lang-item { margin-bottom: var(--space-4); }
+.lang-item:last-child { margin-bottom: 0; }
+.lang-top { display: flex; justify-content: space-between; margin-bottom: var(--space-2); }
+.lang-name { color: var(--color-text-primary); font-weight: 650; font-size: 0.8125rem; }
+.lang-level { color: var(--color-dopamine-orange); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.05em; }
+.lang-track { width: 100%; height: 6px; border-radius: var(--radius-full); background-color: var(--color-neutral-800); overflow: hidden; }
+.lang-fill { height: 100%; border-radius: var(--radius-full); background: var(--gradient-dopamine); }
+
+/* Responsive */
+@media (max-width: 1100px) { body { padding: var(--space-8) var(--space-5) var(--space-12); } }
+@media (max-width: 780px) {
+  .bento-grid { display: flex; flex-direction: column; }
+  .hero-anchor { padding: var(--space-8) var(--space-6); border-radius: var(--radius-2xl); }
+  .panel { padding: var(--space-6); border-radius: var(--radius-xl); }
+  .hero-anchor .contact-list { flex-direction: column; gap: var(--space-2); }
+  .job-header { flex-direction: column; }
+  .job-date { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<div class="workspace">
+
+  <!-- 1. HERO -->
+  <header class="hero-anchor">
+    <div class="status-chip text-label highlight-dopamine">Available for opportunities</div>
+    <h1 class="text-display">Pavel Saiganov</h1>
+    <h2 class="text-h3 highlight-info">Cross-Cultural Strategy &amp; Systems Analyst</h2>
+
+    <div class="hero-meta">
+      <div class="text-body" style="color: var(--color-neutral-300); max-width: 620px;">
+        Market Entry &amp; GR Strategy (Brazil, Africa) · Systems &amp; Requirements Analysis · AI-Assisted Prototyping &amp; Automation
+      </div>
+      <div class="contact-list text-body-small">
+        <span>Moscow (Remote / Willing to Relocate)</span>
+        <a href="mailto:pavel.sayganov@vk.com">pavel.sayganov@vk.com</a>
+        <a href="https://t.me/paveletty" target="_blank">@paveletty</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. BENTO GRID -->
+  <main class="bento-grid">
+
+    <!-- LEFT COLUMN -->
+    <div class="col-8">
+
+      <!-- ABOUT -->
+      <section class="panel">
+        <h3 class="text-h3 panel-header">Professional Profile</h3>
+        <p class="text-body" style="margin-bottom: var(--space-5);">
+          I started as a certified linguist working head-of-state negotiations, spent more than five years as an advisor to the leadership of one of the largest mining companies in Angola, and today help technology businesses scale into the Brazilian market. On the surface these look like different careers. In practice they share one core skill: the ability to quickly read an unfamiliar environment — cultural, political, or digital — and build a system inside it that actually works. Whether that means a closed diplomatic protocol, unblocking negotiations with a ministry, redesigning executive operating processes, or launching a go-to-market strategy on another continent, I've spent over 15 years working where the cost of error is high and people with opposing worldviews still need to agree and deliver results.
+        </p>
+
+        <div class="coach-card">
+          <p class="text-body-small">
+            <strong>Working model: "Analyst → Architect / Advisor, powered by AI"</strong><br>
+            I use modern AI tools (LLMs, Copilot) to collapse the usual technical barrier between analysis and execution. I independently model and validate solutions — generating a working API/script prototype, testing integrations, reviewing database structures, and surfacing architectural bottlenecks in days rather than months — the same instinct for systems I apply to markets, negotiations, and regulatory environments.
+          </p>
+        </div>
+      </section>
+
+      <!-- WHAT I DELIVER -->
+      <section class="panel">
+        <h3 class="text-h3 panel-header">What I Deliver</h3>
+        <ul class="job-bullets text-body-small" style="gap: var(--space-4);">
+          <li><strong>Emerging-market entry &amp; growth (Africa &amp; Latin America):</strong> Taking products and businesses into new regions without "naive globalism" — real working knowledge of local culture, regulation, and decision-making norms in Brazil and Africa.</li>
+          <li><strong>Barrier removal &amp; Government Relations:</strong> Running firm, careful negotiations at C-level, with ministries and state corporations; closing the gap between business expectations and government requirements.</li>
+          <li><strong>Applied AI &amp; automation:</strong> Embedding generative AI and automation tools into day-to-day workflows, cutting costs and freeing up hundreds of hours of team time.</li>
+          <li><strong>Operational discipline:</strong> Thinking in P&amp;L, business impact and controllability — turning chaos into regulations, transparent tracking, and predictable timelines.</li>
+          <li><strong>Linguistic &amp; contextual precision:</strong> Fluent in English and Portuguese (C2). Reads subtext, holds the room in closed-door meetings, and guarantees legal and semantic precision of agreements.</li>
+        </ul>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section class="panel">
+        <h3 class="text-h3 panel-header">Experience</h3>
+
+        <!-- Job 1 -->
+        <div class="job-item">
+          <div class="job-header">
+            <div>
+              <div class="text-h4 job-role">Regional Marketing &amp; Communications Manager</div>
+              <div class="text-body-small job-company">1C-Bitrix24 — Brazil Region</div>
+            </div>
+            <div class="text-body-small job-date">Jan 2025 — Present</div>
+          </div>
+          <div class="text-body job-desc">
+            Scaling the IT ecosystem into the Brazilian market and transforming communications through applied AI.
+          </div>
+          <ul class="job-bullets text-body-small">
+            <li><strong>Value proposition localization:</strong> Adapted the UVP of complex digital products, translating positioning from abstract features into benefits Brazilian B2B buyers actually recognize.</li>
+            <li><strong>AI-driven workflow redesign:</strong> Rebuilt the team's marketing workflows around AI tools, enabling a steady stream of SEO content, social content, and visuals with no headcount increase.</li>
+            <li><strong>Media &amp; influencer network:</strong> Built a network of loyal trade media and opinion leaders across Latin America, securing recurring organic coverage and expert brand presence.</li>
+            <li><strong>Requirements &amp; process bridge:</strong> Translated market and stakeholder needs into functional/non-functional requirements, AS-IS / TO-BE process maps, and use cases connecting go-to-market goals with technical delivery.</li>
+          </ul>
+          <div class="pill-group">
+            <span class="pill accent">Market Entry (Brazil)</span>
+            <span class="pill accent">AI-Assisted Workflows</span>
+            <span class="pill">BRD / SRS</span>
+            <span class="pill">Use Cases</span>
+          </div>
+        </div>
+
+        <!-- Job 2 -->
+        <div class="job-item">
+          <div class="job-header">
+            <div>
+              <div class="text-h4 job-role">Strategic Advisor to Executive Leadership</div>
+              <div class="text-body-small job-company">Catoca Mining Company (ALROSA Group / Angola)</div>
+            </div>
+            <div class="text-body-small job-date">Aug 2019 — Jan 2025</div>
+          </div>
+          <div class="text-body job-desc">
+            Operational resilience, government relations in Angola, and protection of shareholder interests, reporting to the CFO.
+          </div>
+          <ul class="job-bullets text-body-small">
+            <li><strong>200+ high-level negotiation rounds (G2B &amp; B2B):</strong> Acted as lead negotiator and moderator with ministries, state regulators, and foreign partners, resulting in critical strategic agreements and averted regulatory conflicts.</li>
+            <li><strong>30% faster executive task delivery:</strong> Designed and rolled out a centralized cross-departmental tracking system spanning five departments, eliminating information loss at handoff points.</li>
+            <li><strong>Market intelligence system:</strong> Produced regular C-level briefings on regional socio-economic, currency, and legislative risk, directly informing operating strategy.</li>
+            <li><strong>3,000+ pages of technical/legal documentation:</strong> Oversaw translation and verification of complex geology, mining-law, and concession-agreement packages with zero terminology errors, removing legal and financial risk for the company.</li>
+            <li><strong>Turnkey official visits:</strong> Managed external contractors, security, logistics, and protocol for government delegations and foreign partners.</li>
+          </ul>
+          <div class="pill-group">
+            <span class="pill info">Government Relations</span>
+            <span class="pill">Risk Management</span>
+            <span class="pill">AS-IS / TO-BE</span>
+            <span class="pill">C-Level Reporting</span>
+          </div>
+        </div>
+
+        <!-- Job 3 -->
+        <div class="job-item">
+          <div class="job-header">
+            <div>
+              <div class="text-h4 job-role">Systems Analyst / Solution Designer (R&amp;D)</div>
+              <div class="text-body-small job-company">Hermes &amp; Pulse Projects</div>
+            </div>
+            <div class="text-body-small job-date">2024 — 2026</div>
+          </div>
+          <div class="text-body job-desc">
+            Practical execution of the "Analyst → Architect via AI" model: system modeling and rapid prototyping.
+          </div>
+          <ul class="job-bullets text-body-small">
+            <li><strong>Fintech platform (Pulse):</strong> Developed the architectural concept and UX scenarios for a digital bank.</li>
+            <li><strong>AI prototyping (Hermes):</strong> Configured a local AI agent; wrote Python scripts for REST API and OCR workflows.</li>
+            <li><strong>Integrations:</strong> Specified REST API endpoints and JSON/XML formats for cross-system data exchange.</li>
+          </ul>
+          <div class="pill-group">
+            <span class="pill accent">Python</span>
+            <span class="pill accent">REST API</span>
+            <span class="pill accent">LLM Integration</span>
+            <span class="pill">System Design</span>
+          </div>
+        </div>
+
+        <!-- Job 4 -->
+        <div class="job-item">
+          <div class="job-header">
+            <div>
+              <div class="text-h4 job-role">Cross-Cultural Communications &amp; Protocol Specialist</div>
+              <div class="text-body-small job-company">Independent / Parallel Project Practice</div>
+            </div>
+            <div class="text-body-small job-date">Apr 2012 — Present</div>
+          </div>
+          <div class="text-body job-desc">
+            Simultaneous interpretation and protocol at head-of-state level; market-entry consulting for Africa and Latin America.
+          </div>
+          <ul class="job-bullets text-body-small">
+            <li><strong>Head-of-state level protocol:</strong> Supported communications for senior officials at venues including the Russia–Africa Summit, the World Festival of Youth, and intergovernmental commissions.</li>
+            <li><strong>Market-entry &amp; GR consulting:</strong> Helped private companies build initial GR dialogue, assess informal rules of engagement, vet counterparties, and prepare negotiating positions in Africa and Latin America.</li>
+            <li><strong>Confidential commercial negotiations:</strong> Supported closed-door deals requiring deep contextual immersion — reading diplomatic nuance, not just translating words, to prevent deals from collapsing.</li>
+            <li><strong>Turnkey international business missions:</strong> Organized delegation visits end-to-end, achieving a 95% client satisfaction rate.</li>
+          </ul>
+          <div class="pill-group">
+            <span class="pill info">Diplomatic Protocol</span>
+            <span class="pill">Simultaneous Interpretation</span>
+            <span class="pill">GR Consulting</span>
+          </div>
+        </div>
+
+        <!-- Job 5 -->
+        <div class="job-item">
+          <div class="job-header">
+            <div>
+              <div class="text-h4 job-role">Team Liaison Officer</div>
+              <div class="text-body-small job-company">FIFA World Cup 2018™ Local Organising Committee</div>
+            </div>
+            <div class="text-body-small job-date">May 2017 — Jul 2018</div>
+          </div>
+          <div class="text-body job-desc">
+            Crisis management, diplomatic protocol, and operational coordination for a world-class national team delegation.
+          </div>
+          <ul class="job-bullets text-body-small">
+            <li><strong>Delegation operations lead:</strong> Coordinated 5+ adjacent workstreams (transport, security, medical, media, infrastructure) for 24/7 base and travel operations for the Portuguese national team delegation.</li>
+            <li><strong>20% lower logistics costs:</strong> Optimized transport routes and scheduling without compromising FIFA safety and compliance requirements.</li>
+            <li><strong>Real-time interpretation &amp; incident resolution:</strong> Interpreted closed-door meetings and official press conferences; sole point of contact between the Organising Committee, local authorities, and delegation leadership.</li>
+          </ul>
+          <div class="pill-group">
+            <span class="pill accent">Crisis Management</span>
+            <span class="pill">Operational Coordination</span>
+            <span class="pill">Protocol</span>
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="col-4">
+
+      <!-- SKILLS -->
+      <section class="panel">
+        <h3 class="text-h3 panel-header">Core Competencies</h3>
+
+        <div style="margin-bottom: var(--space-5);">
+          <div class="text-label" style="color: var(--color-text-tertiary); margin-bottom: var(--space-2);">Strategy &amp; GR</div>
+          <div class="pill-group" style="margin-top: 0;">
+            <span class="pill info">Market Entry Strategy</span>
+            <span class="pill info">Government Relations</span>
+            <span class="pill">C-Level Negotiation</span>
+            <span class="pill">Diplomatic Protocol</span>
+          </div>
+        </div>
+
+        <div style="margin-bottom: var(--space-5);">
+          <div class="text-label" style="color: var(--color-text-tertiary); margin-bottom: var(--space-2);">Analysis &amp; Design</div>
+          <div class="pill-group" style="margin-top: 0;">
+            <span class="pill accent">BRD / SRS / FRS</span>
+            <span class="pill accent">REST API Design</span>
+            <span class="pill">BPMN 2.0</span>
+            <span class="pill">Use Cases / User Stories</span>
+            <span class="pill">Requirements Gathering</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="text-label" style="color: var(--color-text-tertiary); margin-bottom: var(--space-2);">Technology &amp; AI</div>
+          <div class="pill-group" style="margin-top: 0;">
+            <span class="pill accent">AI-Assisted Prototyping</span>
+            <span class="pill">ChatGPT / Copilot</span>
+            <span class="pill">Python</span>
+            <span class="pill">JSON / XML / SQL</span>
+            <span class="pill">Postman / Swagger</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- LANGUAGES -->
+      <section class="panel">
+        <h3 class="text-h3 panel-header">Languages</h3>
+
+        <div class="lang-item">
+          <div class="lang-top"><span class="lang-name">Russian</span><span class="lang-level">Native</span></div>
+          <div class="lang-track"><div class="lang-fill" style="width:100%;"></div></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-top"><span class="lang-name">English</span><span class="lang-level">C2</span></div>
+          <div class="lang-track"><div class="lang-fill" style="width:96%;"></div></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-top"><span class="lang-name">Portuguese</span><span class="lang-level">C2</span></div>
+          <div class="lang-track"><div class="lang-fill" style="width:96%;"></div></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-top"><span class="lang-name">Spanish</span><span class="lang-level">B2</span></div>
+          <div class="lang-track"><div class="lang-fill" style="width:68%;"></div></div>
+        </div>
+      </section>
+
+      <!-- EDUCATION -->
+      <section class="panel">
+        <h3 class="text-h3 panel-header">Education</h3>
+
+        <div class="edu-item">
+          <div class="text-body edu-title">CFO / Director of Economics &amp; Finance</div>
+          <div class="text-body-small edu-sub">Eduson Academy</div>
+          <div class="text-caption" style="color: var(--color-text-tertiary);">2023 — 2025</div>
+        </div>
+
+        <div class="edu-item">
+          <div class="text-body edu-title">Translation &amp; Interpreting Studies</div>
+          <div class="text-body-small edu-sub">Moscow State Linguistic University (MSLU)</div>
+          <div class="text-caption" style="color: var(--color-text-tertiary);">Graduated 2014</div>
+        </div>
+
+        <div class="edu-item">
+          <div class="text-body edu-title">International Communication — Erasmus+ Exchange</div>
+          <div class="text-body-small edu-sub">Universidade do Minho (Braga, Portugal)</div>
+          <div class="text-caption" style="color: var(--color-text-tertiary);">2013 — 2014</div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>
